@@ -1,48 +1,55 @@
 package com.bosonit.EJ2.application.usecase;
 
-import com.bosonit.EJ2.domain.PersonaEnt;
-import com.bosonit.EJ2.infraestructure.DTOs.OutPutPersonaDTO;
 import com.bosonit.EJ2.infraestructure.Repository.PersonaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
-import java.util.Arrays;
-import java.util.List;
+import static org.mockito.Mockito.verify;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mockingDetails;
-import static org.mockito.Mockito.when;
-
+@ExtendWith(MockitoExtension.class)
 class GetPersonUseCaseTest {
 
     @Mock
     private PersonaRepository personaRepository;
+    //private AutoCloseable autoCloseable;
 
     @InjectMocks
     private GetPersonUseCase getPersonUseCase;
 
-    private OutPutPersonaDTO outPutPersonaDTO;
+    @InjectMocks
+    private ModelMapper modelMapper;
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
+    void setUp() throws Exception{
+        //autoCloseable = MockitoAnnotations.openMocks(this);
+        getPersonUseCase = new GetPersonUseCase(personaRepository, modelMapper);
+    }
 
-        outPutPersonaDTO = new OutPutPersonaDTO();
-        outPutPersonaDTO.setName("Miguel");
-        outPutPersonaDTO.setSurname("Martin");
-        outPutPersonaDTO.setCity("Madrid");
-        outPutPersonaDTO.setPassword(1234);
-        outPutPersonaDTO.setActive(true);
-        outPutPersonaDTO.setPersona_email("Miguel");
-        outPutPersonaDTO.setCompany_email("Miguel");
+    /*@AfterEach
+    void tearDown() throws Exception {
+        autoCloseable.close();
+    }*/
 
+    @Test
+    @Disabled
+    void getPersonaByID() {
+    }
+
+    @Test
+    @Disabled
+    void getPersonByName() {
     }
 
     @Test
     void getAllPerson() {
-        when(personaRepository.findAll()).thenReturn(Arrays.asList(outPutPersonaDTO));
-        assertNotNull(getPersonUseCase.getAllPerson());
+        //when
+        getPersonUseCase.getAllPerson();
+        //then
+        verify(personaRepository).findAll();
     }
+}

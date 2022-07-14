@@ -21,6 +21,11 @@ public class GetPersonUseCase implements GetPersonPort {
     @Autowired
     ModelMapper modelMapper;
 
+    public GetPersonUseCase(PersonaRepository personaRepository, ModelMapper modelMapper) {
+        this.personaRepository = personaRepository;
+        this.modelMapper = modelMapper;
+    }
+
     public OutPutPersonaDTO getPersonaByID(Integer id) throws Exception
     {
         PersonaEnt personaEnt = personaRepository.findById(id).orElseThrow(()-> new NotFoundException("Usuario no encontrado")) ;
