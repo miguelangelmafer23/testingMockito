@@ -5,11 +5,11 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
 import static org.mockito.Mockito.verify;
+import org.assertj.core.api.Assertions;
 
 @ExtendWith(MockitoExtension.class)
 class GetPersonUseCaseTest {
@@ -36,13 +36,14 @@ class GetPersonUseCaseTest {
     }*/
 
     @Test
-    @Disabled
-    void getPersonaByID() {
+    void getPersonaByID() throws Exception {
+        Assertions.assertThatThrownBy(() -> getPersonUseCase.getPersonaByID(1));
     }
 
     @Test
-    @Disabled
     void getPersonByName() {
+        getPersonUseCase.getPersonByName("Miguel");
+        verify(personaRepository).findByName("Miguel");
     }
 
     @Test
