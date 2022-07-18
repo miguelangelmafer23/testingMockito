@@ -2,7 +2,9 @@ package com.bosonit.EJ2.application.usecase;
 
 import com.bosonit.EJ2.domain.PersonaEnt;
 import com.bosonit.EJ2.infraestructure.DTOs.InputPersonaDTO;
+import com.bosonit.EJ2.infraestructure.DTOs.OutPutPersonaDTO;
 import com.bosonit.EJ2.infraestructure.Repository.PersonaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
@@ -25,6 +27,7 @@ class CreatePersonUseCaseTest {
     @InjectMocks
     private ModelMapper modelMapper;
 
+
     @Test
     void addPersona() throws Exception {
         //given
@@ -42,7 +45,7 @@ class CreatePersonUseCaseTest {
         inputPersonaDTO.setActive(true);
         inputPersonaDTO.setImagen_url("sin imagen");
         inputPersonaDTO.setCreated_date(new Date());
-        inputPersonaDTO.setTermination_date(null);
+        inputPersonaDTO.setTermination_date(new Date());
 
         //when
         createPersonUseCase.addPersona(inputPersonaDTO);
